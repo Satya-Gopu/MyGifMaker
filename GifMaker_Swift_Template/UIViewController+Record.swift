@@ -21,7 +21,7 @@ extension UIViewController{
             self.launchPhotoLibrary()
         }
         else{
-            let alert = UIAlertController(title: "create new gif", message: "", preferredStyle: .actionSheet)
+            let alert = UIAlertController(title: "create new gif", message: nil, preferredStyle: .actionSheet)
             let action1 = UIAlertAction(title: "camera", style: .default, handler: { action in
                 self.launchcamera()
             })
@@ -44,7 +44,7 @@ extension UIViewController{
         let recordViewController = UIImagePickerController()
         recordViewController.sourceType = UIImagePickerControllerSourceType.photoLibrary
         recordViewController.mediaTypes = [kUTTypeMovie as String]
-        recordViewController.allowsEditing = false
+        recordViewController.allowsEditing = true
         recordViewController.delegate = self
         self.present(recordViewController, animated: true, completion: nil)
         
@@ -54,7 +54,7 @@ extension UIViewController{
         let recordViewController = UIImagePickerController()
         recordViewController.sourceType = UIImagePickerControllerSourceType.camera
         recordViewController.mediaTypes = [kUTTypeMovie as String]
-        recordViewController.allowsEditing = false
+        recordViewController.allowsEditing = true
         recordViewController.delegate = self
         self.present(recordViewController, animated: true, completion: nil)
         
@@ -69,13 +69,19 @@ extension UIViewController:UIImagePickerControllerDelegate, UINavigationControll
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
+        //picker.allowsEditing = true
         let mediaType = info[UIImagePickerControllerMediaType] as! String
-        
+        let start = info["_UIImagePickerControllerVideoEditingStart"] as? NSNumber
+        let stop = info["_UIImagePickerControllerVideoEditingEnd"] as? NSNumber
+        var duration : Float!
+        if start != nil{
+            duration = stop!.floatValue - start!.floatValue
+        }
         if mediaType == kUTTypeMovie as String{
             let mediaUrl = info[UIImagePickerControllerMediaURL] as! NSURL
             UISaveVideoAtPathToSavedPhotosAlbum(mediaUrl.path!, nil, nil, nil)
             dismiss(animated: true, completion: nil)
-            self.convertVideoToGif(videoUrl: mediaUrl)
+            self.convertVideoToGif(videoUrl: mediaUrl, start: start, duration:duration)
             
         }
         
@@ -85,12 +91,26 @@ extension UIViewController:UIImagePickerControllerDelegate, UINavigationControll
         dismiss(animated: true, completion: nil)
     }
     
-    func convertVideoToGif(videoUrl: NSURL){
+    func convertVideoToGif(videoUrl: NSURL, start : NSNumber?, duration : Float?){
         
-        let regift = Regift(sourceFileURL: videoUrl as URL, frameCount: framecount, delayTime: delatTime)
+        let regift : Regift!
+        
+        if let start = start{
+            
+            regift = Regift(sourceFileURL: videoUrl as URL, destinationFileURL: nil, startTime: start as! Float, duration: duration!, frameRate: 15, loopCount: 0)
+        
+        }
+        else{
+                
+                regift = Regift(sourceFileURL: videoUrl as URL, frameCount: framecount, delayTime: delatTime)
+                
+                
+            }
+        
         let gifurl = regift.createGif()
         
-        var gif = Gif(gifUrl: gifurl!, videourl: videoUrl as URL, caption: nil)
+        let gif = Gif(gifUrl: gifurl!, videourl: videoUrl as URL, caption: nil)
+        
         self.displayGif(gif : gif)
         
     }

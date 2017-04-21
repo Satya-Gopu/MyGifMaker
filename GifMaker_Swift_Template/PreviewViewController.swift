@@ -27,6 +27,22 @@ class PreviewViewController: UIViewController {
     }
 
     @IBAction func share(_ sender: Any) {
+        
+        let data = NSData(contentsOf: (self.gif?.url)!)!
+        let activityarray = [data]
+        
+        var activity = UIActivityViewController(activityItems: activityarray as! [Any], applicationActivities: nil)
+        
+        activity.completionWithItemsHandler = {(activity, completed, donno, err0r) in
+            if(completed){
+                
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+        }
+        
+        self.present(activity, animated: true, completion: nil)
+        
     }
     
     @IBAction func save(_ sender: Any) {
