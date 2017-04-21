@@ -89,23 +89,18 @@ extension UIViewController:UIImagePickerControllerDelegate, UINavigationControll
         
         let regift = Regift(sourceFileURL: videoUrl as URL, frameCount: framecount, delayTime: delatTime)
         let gifurl = regift.createGif()
-        self.displayGif(url: gifurl! as NSURL)
+        
+        var gif = Gif(gifUrl: gifurl!, videourl: videoUrl as URL, caption: nil)
+        self.displayGif(gif : gif)
         
     }
     
-    func displayGif(url:NSURL){
+    func displayGif(gif : Gif){
         
         var editor = self.storyboard?.instantiateViewController(withIdentifier: "GifEditorViewController") as! GifEditorViewController
-        editor.gifurl = url
+        editor.gif = gif
         self.navigationController?.pushViewController(editor, animated: true)
         
-        
-        
     }
-    
-    
-    
-    
-    
     
 }
