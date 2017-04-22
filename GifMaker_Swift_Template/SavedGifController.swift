@@ -39,6 +39,11 @@ class SavedGifController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         self.view.alpha = 1
         super.viewWillAppear(animated)
+        if let archived = NSKeyedUnarchiver.unarchiveObject(withFile: gifsFilePath){
+            
+            self.gifs = archived as! [Gif]
+            
+        }
         self.collection.reloadData()
         self.stack.isHidden = (self.gifs.count != 0)
     }
@@ -48,6 +53,7 @@ class SavedGifController: UIViewController{
 extension SavedGifController : PreviewViewControllerDelegate{
     
     func savegif(gif: Gif) {
+        gif.gifData = NSData(contentsOf: gif.url)
         self.gifs.append(gif)
         NSKeyedArchiver.archiveRootObject(self.gifs, toFile: gifsFilePath)
     }
@@ -69,7 +75,7 @@ extension SavedGifController : UICollectionViewDataSource, UICollectionViewDeleg
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         
-        cell.cellImage.image = UIImage.gif(url: self.gifs[indexPath.row].url.absoluteString)
+        cell.configurecell(gif: self.gifs[indexPath.item])
         
         return cell
         

@@ -13,7 +13,10 @@ class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var cellImage: UIImageView!
     
-    
+    func configurecell(gif : Gif){
+        
+        cellImage.image = gif.gifImage
+    }
     
     
     
