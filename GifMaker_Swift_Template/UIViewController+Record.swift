@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import AVFoundation
 import MobileCoreServices
 
 let framecount = 16
@@ -86,7 +87,22 @@ extension UIViewController:UIImagePickerControllerDelegate, UINavigationControll
         }
         
     }
-    
+    /*
+    func cropVideoToSquare(videoUrl: NSURL, start : NSNumber?, duration : Float?){
+        //create avasset
+        let avasset = AVAsset(url: videoUrl as URL)
+        let videoTrack = avasset.tracks(withMediaType: AVMediaTypeVideo)[0]
+        
+        //crop to square
+        var videocomposition = AVMutableVideoComposition(propertiesOf: avasset)
+        videocomposition.renderSize = CGSize(width: videoTrack.naturalSize.height, height: videoTrack.naturalSize.height)
+        videocomposition.frameDuration = CMTime(value: 1, timescale: 30)
+        
+        //var instruction = AVMutableVideoCompositionInstruction()
+        //instruction.timeRange = CMTimeRange(
+        
+    }
+    */
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }

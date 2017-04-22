@@ -45,6 +45,7 @@ class GifEditorViewController: UIViewController, UITextFieldDelegate {
         
         let newgif = Gif(gifUrl: gifurl!, videourl: (self.gif?.videourl)!, caption: self.captionText.text)
         preview.gif = newgif
+        preview.delegate = self.navigationController?.viewControllers[0] as? PreviewViewControllerDelegate
         self.navigationController?.pushViewController(preview, animated: true)
         
     }

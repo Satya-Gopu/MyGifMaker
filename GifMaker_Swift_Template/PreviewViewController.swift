@@ -8,7 +8,18 @@
 
 import UIKit
 
+protocol PreviewViewControllerDelegate {
+    
+    
+    func savegif(gif : Gif)
+    
+}
+
+
+
 class PreviewViewController: UIViewController {
+    
+    var delegate : PreviewViewControllerDelegate?
     
     var gif : Gif!
 
@@ -31,9 +42,9 @@ class PreviewViewController: UIViewController {
         let data = NSData(contentsOf: (self.gif?.url)!)!
         let activityarray = [data]
         
-        var activity = UIActivityViewController(activityItems: activityarray as! [Any], applicationActivities: nil)
+        let activity = UIActivityViewController(activityItems: activityarray as [Any], applicationActivities: nil)
         
-        activity.completionWithItemsHandler = {(activity, completed, donno, err0r) in
+        activity.completionWithItemsHandler = {(activity, completed, donno, error) in
             if(completed){
                 
                 self.dismiss(animated: true, completion: nil)
@@ -46,6 +57,10 @@ class PreviewViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
+        print("in preview")
+        delegate?.savegif(gif: self.gif)
+        
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     

@@ -21,7 +21,7 @@
                         <color key="tintColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="aXC-Xw-CZL" kind="relationship" relationship="rootViewController" id="O6U-Pr-xGP"/>
+                        <segue destination="upq-jB-3dI" kind="relationship" relationship="rootViewController" id="Nh5-bY-iGa"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DM2-vZ-vXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -31,7 +31,7 @@
         <!--My Collection-->
         <scene sceneID="ALv-Et-lNO">
             <objects>
-                <viewController storyboardIdentifier="SavedGifsViewController" title="My Collection" useStoryboardIdentifierAsRestorationIdentifier="YES" id="upq-jB-3dI" customClass="SavedGifsViewController" customModule="GifMaker_Swift_Template" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SavedGifsViewController" title="My Collection" useStoryboardIdentifierAsRestorationIdentifier="YES" id="upq-jB-3dI" customClass="SavedGifController" customModule="GifMaker_Swift_Template" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E4A-ch-Oxv"/>
                         <viewControllerLayoutGuide type="bottom" id="zVw-uv-suS"/>
@@ -50,7 +50,7 @@
                                     <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GifCell" id="2ru-Ed-G6h" customClass="GifCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="2ru-Ed-G6h" customClass="CollectionViewCell" customModule="GifMaker_Swift_Template" customModuleProvider="target">
                                         <rect key="frame" x="99" y="8" width="177" height="177"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -62,6 +62,7 @@
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" red="1" green="0.96733836449999999" blue="0.5665629942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="sHD-OW-keS" firstAttribute="centerY" secondItem="2ru-Ed-G6h" secondAttribute="centerY" id="3tT-Xx-fXS"/>
                                             <constraint firstItem="sHD-OW-keS" firstAttribute="top" secondItem="2ru-Ed-G6h" secondAttribute="topMargin" constant="-8" id="Vlj-Xn-EIa"/>
@@ -84,7 +85,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="gifImageView" destination="sHD-OW-keS" id="VAe-LJ-h3J"/>
+                                            <outlet property="cellImage" destination="sHD-OW-keS" id="glS-Kl-LQz"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -100,6 +101,9 @@
                                     <constraint firstAttribute="height" constant="60" id="nD5-xT-Xdf"/>
                                 </constraints>
                                 <state key="normal" image="createButton"/>
+                                <connections>
+                                    <action selector="LaunchVideoCameraWithSender:" destination="upq-jB-3dI" eventType="touchUpInside" id="GcS-yE-JB2"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="rBY-mr-O59">
                                 <rect key="frame" x="16" y="261.5" width="343" height="144"/>
@@ -160,6 +164,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Collection" id="7HF-Yq-Lti"/>
+                    <connections>
+                        <outlet property="collection" destination="hbv-Kk-KXX" id="iTh-YF-PiM"/>
+                        <outlet property="stack" destination="rBY-mr-O59" id="ZgF-P9-3Hr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1mO-R1-5Re" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -320,6 +328,9 @@
                                 <state key="normal" title="SHARE">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="shareWithSender:" destination="Ilf-GF-t1a" eventType="touchUpInside" id="eq6-eg-gjF"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fMj-xi-5Fm">
                                 <rect key="frame" x="16" y="162" width="343" height="343"/>
@@ -334,6 +345,9 @@
                                     <constraint firstAttribute="width" constant="44" id="aAD-pY-dof"/>
                                 </constraints>
                                 <state key="normal" image="Close"/>
+                                <connections>
+                                    <action selector="dismiss" destination="Ilf-GF-t1a" eventType="touchUpInside" id="vAK-9n-jwx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.18039215689999999" green="0.23921568630000001" blue="0.28235294119999998" alpha="0.89705230496453903" colorSpace="custom" customColorSpace="sRGB"/>
@@ -349,6 +363,9 @@
                             <constraint firstItem="8DJ-Ka-ETF" firstAttribute="top" secondItem="tie-bE-ygI" secondAttribute="bottom" constant="20" id="zYz-Sa-xDb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="image" destination="fMj-xi-5Fm" id="hbu-1U-DuN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEl-4x-y0s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

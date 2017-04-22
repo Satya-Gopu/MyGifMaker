@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Gif{
+class Gif : NSObject, NSCoding{
     
     var url : URL!
     var caption : String!
@@ -33,9 +33,21 @@ class Gif{
         
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        self.url = aDecoder.decodeObject(forKey: "url") as! URL
+        self.caption = aDecoder.decodeObject(forKey: "caption") as? String
+        self.videourl = aDecoder.decodeObject(forKey: "videourl") as! URL
+        self.gifImage = aDecoder.decodeObject(forKey: "gifImage") as! UIImage
+        self.gifData = aDecoder.decodeObject(forKey: "gifData") as? NSData
+    }
     
-    
-    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.url, forKey: "url")
+        aCoder.encode(self.caption, forKey: "caption")
+        aCoder.encode(self.videourl, forKey: "videourl")
+        aCoder.encode(self.gifImage, forKey: "gifImage")
+        aCoder.encode(self.gifData, forKey: "gifData")
+    }
     
     
 }
