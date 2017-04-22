@@ -250,7 +250,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HQu-c2-zTO">
-                                <rect key="frame" x="16" y="50" width="343" height="343"/>
+                                <rect key="frame" x="16" y="100" width="343" height="343"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="HQu-c2-zTO" secondAttribute="height" multiplier="1:1" id="K5r-87-DUU"/>
                                 </constraints>
@@ -290,7 +290,7 @@
                         <color key="backgroundColor" red="0.18039215689999999" green="0.23921568630000001" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="HQu-c2-zTO" firstAttribute="leading" secondItem="Alv-iW-6pc" secondAttribute="leadingMargin" id="5Iu-g7-p8a"/>
-                            <constraint firstItem="HQu-c2-zTO" firstAttribute="top" secondItem="Alv-iW-6pc" secondAttribute="topMargin" constant="50" id="BMd-cM-52I"/>
+                            <constraint firstItem="HQu-c2-zTO" firstAttribute="top" secondItem="Alv-iW-6pc" secondAttribute="topMargin" constant="100" id="BMd-cM-52I"/>
                             <constraint firstItem="zEa-bK-uMp" firstAttribute="top" secondItem="aqi-WW-nfX" secondAttribute="bottom" constant="20" id="Ibz-ed-k9d"/>
                             <constraint firstItem="aqi-WW-nfX" firstAttribute="leading" secondItem="Alv-iW-6pc" secondAttribute="leadingMargin" id="NdQ-Y0-uYO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aqi-WW-nfX" secondAttribute="trailing" id="wVr-2y-Gea"/>
@@ -350,7 +350,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.18039215689999999" green="0.23921568630000001" blue="0.28235294119999998" alpha="0.89705230496453903" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fMj-xi-5Fm" firstAttribute="centerY" secondItem="98u-Ei-l0c" secondAttribute="centerY" id="0xS-P0-Wef"/>
                             <constraint firstItem="fMj-xi-5Fm" firstAttribute="centerX" secondItem="98u-Ei-l0c" secondAttribute="centerX" id="1nT-PV-jGp"/>

@@ -29,7 +29,6 @@ class SavedGifController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("unarchived")
         if let archived = NSKeyedUnarchiver.unarchiveObject(withFile: gifsFilePath){
             
             self.gifs = archived as! [Gif]
@@ -38,6 +37,7 @@ class SavedGifController: UIViewController{
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.view.alpha = 1
         super.viewWillAppear(animated)
         self.collection.reloadData()
         self.stack.isHidden = (self.gifs.count != 0)
@@ -78,10 +78,10 @@ extension SavedGifController : UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let detail = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        
         detail.gif = self.gifs[indexPath.row]
-        
-        self.present(detail, animated: true, completion: nil)
+        self.present(detail, animated: true, completion: {
+            self.view.alpha = 0
+        })
         
     }
     
@@ -95,17 +95,5 @@ extension SavedGifController : UICollectionViewDelegateFlowLayout{
         return CGSize(width: availwidth, height: availwidth)
         
     }
-    /*
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
-    }*/
-    
-    
-    
-    
     
 }

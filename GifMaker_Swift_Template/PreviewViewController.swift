@@ -9,13 +9,8 @@
 import UIKit
 
 protocol PreviewViewControllerDelegate {
-    
-    
     func savegif(gif : Gif)
-    
 }
-
-
 
 class PreviewViewController: UIViewController {
     
@@ -57,7 +52,6 @@ class PreviewViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-        print("in preview")
         delegate?.savegif(gif: self.gif)
         
         self.navigationController?.popToRootViewController(animated: true)

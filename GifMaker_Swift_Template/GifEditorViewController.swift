@@ -11,16 +11,12 @@ import UIKit
 class GifEditorViewController: UIViewController, UITextFieldDelegate {
     
     var gif: Gif?
-
     @IBOutlet weak var gifImage: UIImageView!
-    
-    
     @IBOutlet weak var captionText: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
