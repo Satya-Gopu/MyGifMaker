@@ -45,6 +45,7 @@ class SavedGifController: UIViewController{
             
         }
         self.collection.reloadData()
+        self.navigationController?.navigationBar.isHidden = (self.gifs.count == 0)
         self.stack.isHidden = (self.gifs.count != 0)
     }
   
